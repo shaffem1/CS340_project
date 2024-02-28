@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Return</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            width: 50%;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"], input[type="number"], input[type="checkbox"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 8px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h2>Edit Return</h2>
+    <form action="/update_return" method="post">
+        <input type="hidden" name="return_id" value="{{ return_data[0] }}">
+        <label for="customer_id">CustomerID:</label>
+        <input type="text" name="customer_id" value="{{ return_data[1] }}">
+        <label for="invoice_id">InvoiceID:</label>
+        <input type="text" name="invoice_id" value="{{ return_data[2] }}">
+        <label for="product_id">ProductID:</label>
+        <input type="text" name="product_id" value="{{ return_data[3] }}">
+        <button type="submit">Update Return</button>
+    </form>
+    <br>
+    <a href="/returns">Back to Return</a>
+    <br>
+</body>
+</html>
+
+

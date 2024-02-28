@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Customer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            width: 50%;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"], input[type="number"], input[type="checkbox"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 8px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h2>Edit Customer </h2>
+    <form action="/update_customer" method="post">
+        <label for="customer_ID"></label>
+        <input type="hidden" name="customer_ID" value="{{ customer[0] }}">
+
+        <label for="customer_first_name">First Name:</label>        
+        <input type="text" name="customer_first_name" value="{{ customer[1] }}">
+
+        <label for="customer_last_name">Last Name:</label>        
+        <input type="text" name="customer_last_name" value="{{ customer[2] }}">
+
+        <label for="customer_address">Address:</label>        
+        <input type="text" name="customer_address" value="{{ customer[3] }}">
+
+        <label for="customer_email">Email:</label>        
+        <input type="text" name="customer_email" value="{{ customer[4] }}">
+                
+        <label for="customer_is_premium_member">Premium Member:</label>        
+        <input type="checkbox" name="customer_is_premium_member" {% if customer[5] %}checked{% endif %}>
+
+        <label for="customer_cell_phone">Cell Phone:</label>        
+        <input type="text" name="customer_cell_phone" value="{{ customer[6] }}">
+
+        <label for="customer_home_phone">Home Phone:</label>        
+        <input type="text" name="customer_home_phone" value="{{ customer[7] }}">
+
+        <button type="submit">Update Customer</button>
+    </form>
+    <br>
+    <a href="/customers">Back to Customers</a>
+    <br>
+</body>
+</html>
+

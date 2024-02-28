@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            width: 50%;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"], input[type="number"], input[type="checkbox"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 8px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h2>Edit Invoice</h2>
+    <form action="/update_invoice" method="post">
+        <input type="hidden" name="invoice_id" value="{{ invoice[0] }}">
+        <label for="customer_id">CustomerID:</label>
+        <input type="text" name="customer_id" value="{{ invoice[1] }}">
+        <label for="product_id">ProductID:</label>
+        <input type="text" name="product_id" value="{{ invoice[2] }}">
+        <label for="invoice_date">Invoice Date:</label>
+        <input type="date" name="invoice_date" value="{{ invoice[3] }}">
+        <label for="invoice_amount">Invoice Amount:</label>
+        <input type="text" name="invoice_amount" value="{{ invoice[4] }}">
+        <label for="payment_method">Payment Method:</label>
+        <input type="text" name="payment_method" value="{{ invoice[5] }}">
+        <button type="submit">Update Invoice</button>
+    </form>
+    <br>
+    <a href="/invoices">Back to Invoices</a>
+    <br>
+</body>
+</html>
+

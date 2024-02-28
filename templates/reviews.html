@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .add-review-form td {
+            border: none;
+        }
+        .add-review-form input[type="text"],
+        .add-review-form input[type="number"] {
+            width: 100%;
+            padding: 5px;
+        }
+        .add-review-form button {
+            padding: 8px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .add-review-form button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <a href="/">Main Menu</a>
+    <a href="/customers">Customers</a>
+    <a href="/products">Products</a>
+    <a href="/invoices">Invoices</a>
+    <a href="/returns">Returns</a>
+    <a href="/reviews">Reviews</a><br>
+    <h2>Reviews</h2>
+    <table>
+        <!-- Table headers -->
+        <thead>
+            <tr>
+                <th>ReviewID</th>
+                <th>CustomerID</th>
+                <th>ProductID</th>
+                <th>Review Text</th>
+                <th>Star Rating</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <!-- Table body -->
+        <tbody>
+            <!-- Rows for existing reviews -->
+            {% for review in reviews %}
+            <tr>
+                <td>{{ review[0] }}</td>
+                <td>{{ review[1] }}</td>
+                <td>{{ review[2] }}</td>
+                <td>{{ review[3] }}</td>
+                <td>{{ review[4] }}</td>
+                <td><a href="/edit_review/{{ review[0] }}">Edit</a></td>
+                <td><a href="/delete_review?review_id={{ review[0] }}">Delete</a></td>
+            </tr>
+            {% endfor %}
+            <!-- Form for adding a new review -->
+            <tr class="add-review-form">
+                <form action="/add_review" method="post">
+                    <td></td>
+                    <td><select name="customer_id"> {% for customer_id in customer_ids %}
+                    <option value="{{ customer_id }}">{{ customer_id }}</option>
+                    {% endfor %}
+                    </select> </td>
+                    
+                    <td><select name="product_id"> {% for product_id in product_ids %}
+                    <option value="{{ product_id }}">{{ product_id }}</option>
+                    {% endfor %}
+                    </select> </td>
+                    <td><input type="text" name="review_text" placeholder="Enter review text"></td>
+                    <td><input type="text" name="star_rating" placeholder="Enter star rating 0-5"></td>
+                    <td><button type="submit">Add Review</button></td>
+                    <td></td>
+                </form>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+
+

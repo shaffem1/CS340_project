@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit review</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            width: 50%;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"], input[type="number"], input[type="checkbox"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 8px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h2>Edit review </h2>
+    <form action="/update_review" method="post">
+        <label for="review_id"></label>
+        <input type="hidden" name="review_id" value="{{ review[0] }}">
+
+        <label for="customer_id">CustomerID:</label>        
+        <input type="text" name="customer_id" value="{{ review[1] }}">
+
+        <label for="product_id">ProductID:</label>        
+        <input type="text" name="product_id" value="{{ review[2] }}">
+
+        <label for="review_text">Review Text:</label>        
+        <input type="text" name="review_text" value="{{ review[3] }}">
+
+        <label for="star_rating">Star Rating:</label>        
+        <input type="text" name="star_rating" value="{{ review[4] }}">
+
+        <button type="submit">Update review</button>
+    </form>
+    <br>
+    <a href="/reviews">Back to reviews</a>
+    <br>
+</body>
+</html>
+
+

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoices</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .add-invoice-form td {
+            border: none;
+        }
+        .add-invoice-form input[type="text"],
+        .add-invoice-form input[type="number"] {
+            width: 100%;
+            padding: 5px;
+        }
+        .add-invoice-form button {
+            padding: 8px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .add-invoice-form button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <a href="/">Main Menu</a>
+    <a href="/customers">Customers</a>
+    <a href="/products">Products</a>
+    <a href="/invoices">Invoices</a>
+    <a href="/returns">Returns</a>
+    <a href="/reviews">Reviews</a><br>
+    <h2>Invoices</h2>
+    <table>
+        <!-- Table headers -->
+        <thead>
+            <tr>
+                <th>InvoiceID</th>
+                <th>CustomerID</th>
+                <th>ProductID</th>
+                <th>Invoice Date</th>
+                <th>Invoice Amount</th>
+                <th>Payment Method</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <!-- Table body -->
+        <tbody>
+            <!-- Rows for existing invoices -->
+            {% for invoice in invoices %}
+            <tr>
+                <td>{{ invoice[0] }}</td>
+                <td>{{ invoice[1] }}</td>
+                <td>{{ invoice[2] }}</td>
+                <td>{{ invoice[3] }}</td>
+                <td>{{ invoice[4] }}</td>
+                <td>{{ invoice[5] }}</td>
+                <td><a href="/edit_invoice/{{ invoice[0] }}">Edit</a></td>
+                <td><a href="/delete_invoice?invoice_id={{ invoice[0] }}">Delete</a></td>
+            </tr>
+            {% endfor %}
+            <!-- Form for adding a new invoice -->
+            <tr class="add-invoice-form">
+                <form action="/add_invoice" method="post">
+                    <td></td>
+                    <td><input type="text" name="customer_id" placeholder="Enter Customer ID"></td>
+                    <td><input type="text" name="product_id" placeholder="Enter Product ID"></td>
+                    <td><input type="date" name="invoice_date" placeholder="Enter invoice date"></td>
+                    <td><input type="text" name="invoice_amount" placeholder="Enter invoice amount"></td>
+                    <td><input type="text" name="payment_method" placeholder="Enter payment method"></td>
+                    <td><button type="submit">Add Invoice</button></td>
+                    <td></td>
+                </form>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+
+
+

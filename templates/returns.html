@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Returns</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .add-return-form td {
+            border: none;
+        }
+        .add-return-form input[type="text"],
+        .add-return-form input[type="number"] {
+            width: 100%;
+            padding: 5px;
+        }
+        .add-return-form button {
+            padding: 8px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .add-return-form button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <a href="/">Main Menu</a>
+    <a href="/customers">Customers</a>
+    <a href="/products">Products</a>
+    <a href="/invoices">Invoices</a>
+    <a href="/returns">Returns</a>
+    <a href="/reviews">Reviews</a><br>
+    <h2>Returns</h2>
+    <table>
+        <!-- Table headers -->
+        <thead>
+            <tr>
+                <th>ReturnID</th>
+                <th>CustomerID</th>
+                <th>InvoiceID</th>
+                <th>ProductID</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <!-- Table body -->
+        <tbody>
+            <!-- Rows for existing returnss -->
+            {% for return in returns %}
+            <tr>
+                <td>{{ return[0] }}</td>
+                <td>{{ return[1] }}</td>
+                <td>{{ return[2] }}</td>
+                <td>{{ return[3] }}</td>
+                <td><a href="/edit_return/{{ return[0] }}">Edit</a></td>
+                <td><a href="/delete_return?return_id={{ return[0] }}">Delete</a></td>
+            </tr>
+            {% endfor %}
+            <!-- Form for adding a new return -->
+            <tr class="add-return-form">
+                <form action="/add_return" method="post">
+                    <td></td>
+                    <td><input type="text" name="customer_id" placeholder="Enter Customer ID"></td>
+                    <td><input type="text" name="invoice_id" placeholder="Enter Invoice ID"></td>
+                    <td><input type="text" name="product_id" placeholder="Enter Product ID"></td>
+                    <td><button type="submit">Add Return</button></td>
+                    <td></td>
+                </form>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+
+
+
+

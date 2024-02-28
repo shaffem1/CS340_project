@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .add-product-form td {
+            border: none;
+        }
+        .add-product-form input[type="text"],
+        .add-product-form input[type="number"] {
+            width: 100%;
+            padding: 5px;
+        }
+        .add-product-form button {
+            padding: 8px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .add-product-form button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <a href="/">Main Menu</a>
+    <a href="/customers">Customers</a>
+    <a href="/products">Products</a>
+    <a href="/invoices">Invoices</a>
+    <a href="/returns">Returns</a>
+    <a href="/reviews">Reviews</a><br>
+    <h2>Products</h2>
+    <table>
+        <!-- Table headers -->
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Brand</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Stock Quantity</th>
+                <th>Back Ordered</th>
+                <th>Discontinued</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <!-- Table body -->
+        <tbody>
+            <!-- Rows for existing products -->
+            {% for product in products %}
+            <tr>
+                <td>{{ product[0] }}</td>
+                <td>{{ product[1] }}</td>
+                <td>{{ product[2] }}</td>
+                <td>${{ product[3] }}</td>
+                <td>{{ product[4] }}</td>
+                <td>{{ "Yes" if product[5] else "No" }}</td>
+                <td>{{ "Yes" if product[6] else "No" }}</td>
+                <td><a href="/edit_product/{{ product[0] }}">Edit</a></td>
+                <td><a href="/delete_product?product_id={{ product[0] }}">Delete</a></td>
+            </tr>
+            {% endfor %}
+            <!-- Form for adding a new product -->
+            <tr class="add-product-form">
+                <form action="/add_product" method="post">
+                    <td></td>
+                    <td><input type="text" name="product_brand" placeholder="Enter brand"></td>
+                    <td><input type="text" name="product_name" placeholder="Enter product name"></td>
+                    <td><input type="number" step="0.01" name="product_price" placeholder="Enter price"></td>
+                    <td><input type="number" name="product_stock_quantity" placeholder="Enter stock quantity"></td>
+                    <td><input type="checkbox" name="is_back_ordered"></td>
+                    <td><input type="checkbox" name="is_discontinued"></td>
+                    <td><button type="submit">Add Product</button></td>
+                    <td></td>
+                </form>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+

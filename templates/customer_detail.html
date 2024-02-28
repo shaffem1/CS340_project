@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Detail</title>
+</head>
+<body>
+    <h1>Customer Detail</h1>
+    <h2>Customer Information</h2>
+    <p>Customer ID: {{ customer[0] }}</p>
+    <p>Name: {{ customer[1] }} {{ customer[2] }}</p>
+    <!-- Add more customer details here -->
+
+    <h2>Invoices</h2>
+    <ul>
+        {% for invoice in invoices %}
+            <li>Invoice ID: {{ invoice[0] }}</li>
+            <!-- Display other invoice details -->
+        {% endfor %}
+    </ul>
+
+    <h2>Returns</h2>
+    <ul>
+        {% for return_data in returns %}
+            <li>Return ID: {{ return_data[0] }}</li>
+            <!-- Display other return details -->
+        {% endfor %}
+    </ul>
+</body>
+</html>

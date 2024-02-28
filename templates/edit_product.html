@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            width: 50%;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"], input[type="number"], input[type="checkbox"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 8px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h2>Edit Product</h2>
+    <form action="/update_product" method="post">
+        <input type="hidden" name="product_id" value="{{ product[0] }}">
+        <label for="product_brand">Brand:</label>
+        <input type="text" name="product_brand" value="{{ product[1] }}">
+        <label for="product_name">Product Name:</label>
+        <input type="text" name="product_name" value="{{ product[2] }}">
+        <label for="product_price">Price:</label>
+        <input type="number" step="0.01" name="product_price" value="{{ product[3] }}">
+        <label for="product_stock_quantity">Stock Quantity:</label>
+        <input type="number" name="product_stock_quantity" value="{{ product[4] }}">
+        <label for="is_back_ordered">Back Ordered:</label>
+        <input type="checkbox" name="is_back_ordered" {% if product[5] %}checked{% endif %}>
+        <label for="is_discontinued">Discontinued:</label>
+        <input type="checkbox" name="is_discontinued" {% if product[6] %}checked{% endif %}>
+        <button type="submit">Update Product</button>
+    </form>
+    <br>
+    <a href="/products">Back to Products</a>
+    <br>
+</body>
+</html>
+

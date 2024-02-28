@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .add-customer-form td {
+            border: none;
+        }
+        .add-customer-form input[type="text"],
+        .add-customer-form input[type="number"] {
+            width: 100%;
+            padding: 5px;
+        }
+        .add-customer-form button {
+            padding: 8px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .add-customer-form button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <a href="/">Main Menu</a>
+    <a href="/customers">Customers</a>
+    <a href="/products">Products</a>
+    <a href="/invoices">Invoices</a>
+    <a href="/returns">Returns</a>
+    <a href="/reviews">Reviews</a><br>
+    <h2>Customers</h2>
+    <table>
+        <!-- Table headers -->
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Premium Member?</th>
+                <th>Cell Phone</th>
+                <th>Home Phone</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <!-- Table body -->
+        <tbody>
+            <!-- Rows for existing customers -->
+            {% for customer in customers %}
+            <tr>
+                <td>{{ customer[0] }}</td>
+                <td>{{ customer[1] }}</td>
+                <td>{{ customer[2] }}</td>
+                <td>{{ customer[3] }}</td>
+                <td>{{ customer[4] }}</td>
+                <td>{{ "Yes" if customer[5] else "No" }}</td>
+                <td>{{ customer[6] }}</td>
+                <td>{{ customer[7] }}</td>
+                <td><a href="/edit_customer/{{ customer[0] }}">Edit</a></td>
+                <td><a href="/delete_customer?customer_id={{ customer[0] }}">Delete</a></td>
+            </tr>
+            {% endfor %}
+            <!-- Form for adding a new customer -->
+            <tr class="add-customer-form">
+                <form action="/add_customer" method="post">
+                    <td></td>
+                    <td><input type="text" name="first_name" placeholder="Enter first name"></td>
+                    <td><input type="text" name="last_name" placeholder="Enter last name"></td>
+                    <td><input type="text" name="address" placeholder="Enter address"></td>
+                    <td><input type="text" name="email" placeholder="Enter email"></td>
+                    <td><input type="checkbox" name="is_premium_member"></td>
+                    <td><input type="text" name="cell_phone" placeholder="Enter cell phone"></td>
+                    <td><input type="text" name="home_phone" placeholder="Enter home phone"></td>
+
+                    <td><button type="submit">Add Customer</button></td>
+                    <td></td>
+                </form>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+
